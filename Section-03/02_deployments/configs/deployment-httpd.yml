@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-httpd
+  labels:
+    component: httpd_webserver
+spec:
+  replicas: 2 
+  minReadySeconds: 10 # This is one of the features Deployments have that enhances replicasets
+  selector:
+    matchLabels:
+      component: httpd_webserver
+  template:
+    metadata:
+      labels:
+        component: httpd_webserver
+    spec: 
+      containers:
+        - name: cntr-httpd
+          image: httpd:2.4.37
+#          image: httpd:2.4.38
+          ports:
+            - containerPort: 80
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              /bin/echo "You've hit - $HOSTNAME" > /usr/local/apache2/htdocs/index.html
+              /usr/local/bin/httpd-foreground 

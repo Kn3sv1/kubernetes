@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-capabilities
+spec:
+  containers:
+    - name: cntr-alpine
+      image: alpine
+      securityContext:
+        capabilities:                     # We add this line. 
+          add:                           
+            - SYS_TIME
+            - NET_ADMIN
+          drop:
+            - CHOWN
+      command: ["sh", "-c"]
+      args:
+        - |
+          while true ; do
+            date
+            sleep 10 
+          done

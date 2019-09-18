@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-httpd
+spec:
+  imagePullSecrets:                               # we add this section
+    - name: docker-hub-credentials
+  containers:
+    - name: cntr-httpd
+      image: index.docker.io/codingbee/httpd:0.1   # note, we omit 'v1', I think because authentication is not done in v1
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 80

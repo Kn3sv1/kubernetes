@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-db-data-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 0.5Gi
+#  volumeName: pv-db-data-storage   # this is optional, and adds extra constraint if used. 
+  storageClassName: ""    # we'll explain why this should be include later. 

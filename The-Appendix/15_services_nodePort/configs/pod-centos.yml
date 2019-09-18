@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-centos
+  labels:
+    component: centos
+spec:
+  containers:
+    - name: cntr-centos
+      image: centos
+      command: ["/bin/bash", "-c"]
+      args:
+        - |
+          yum install -y bind-utils
+          while true ; do
+            date 
+            # curl http://??????
+            sleep 10 
+          done
